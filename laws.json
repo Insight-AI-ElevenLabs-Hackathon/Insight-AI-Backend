@@ -1,0 +1,2217 @@
+{
+    "bills": [
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-30",
+                "text": "Became Public Law No: 118-90."
+            },
+            "laws": [
+                {
+                    "number": "118-90",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3764",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "United States Commission on International Religious Freedom Reauthorization Act of 2024",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/3764?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-30",
+                "text": "Became Public Law No: 118-89."
+            },
+            "laws": [
+                {
+                    "number": "118-89",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "7032",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Congressional Budget Office Data Sharing Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/7032?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-02",
+                "text": "Became Public Law No: 118-105."
+            },
+            "laws": [
+                {
+                    "number": "118-105",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2228",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Building Chips in America Act of 2023",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/2228?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-02",
+                "text": "Became Public Law No: 118-104."
+            },
+            "laws": [
+                {
+                    "number": "118-104",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1549",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Congressional Budget Office Data Access Act",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/1549?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-24",
+                "text": "Became Public Law No: 118-64."
+            },
+            "laws": [
+                {
+                    "number": "118-64",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "546",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Recruit and Retain Act",
+            "type": "S",
+            "updateDate": "2024-10-03",
+            "updateDateIncludingText": "2024-10-03",
+            "url": "https://api.congress.gov/v3/bill/118/s/546?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-103."
+            },
+            "laws": [
+                {
+                    "number": "118-103",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "4698",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "DHS Joint Task Forces Reauthorization Act of 2024",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/4698?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-102."
+            },
+            "laws": [
+                {
+                    "number": "118-102",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3851",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to designate the facility of the United States Postal Service located at 90 McCamly Street South in Battle Creek, Michigan, as the \"Sojourner Truth Post Office\".",
+            "type": "S",
+            "updateDate": "2024-10-03",
+            "updateDateIncludingText": "2024-10-03",
+            "url": "https://api.congress.gov/v3/bill/118/s/3851?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-101."
+            },
+            "laws": [
+                {
+                    "number": "118-101",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3640",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to designate the facility of the United States Postal Service located at 155 South Main Street in Mount Clemens, Michigan, as the \"Lieutenant Colonel Alexander Jefferson Post Office\".",
+            "type": "S",
+            "updateDate": "2024-10-03",
+            "updateDateIncludingText": "2024-10-03",
+            "url": "https://api.congress.gov/v3/bill/118/s/3640?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-100."
+            },
+            "laws": [
+                {
+                    "number": "118-100",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3639",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to designate the facility of the United States Postal Service located at 2075 West Stadium Boulevard in Ann Arbor, Michigan, as the \"Robert Hayden Post Office\".",
+            "type": "S",
+            "updateDate": "2024-10-03",
+            "updateDateIncludingText": "2024-10-03",
+            "url": "https://api.congress.gov/v3/bill/118/s/3639?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-99."
+            },
+            "laws": [
+                {
+                    "number": "118-99",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2685",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Reuse Excess Property Act",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/2685?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-98."
+            },
+            "laws": [
+                {
+                    "number": "118-98",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "794",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "CTPAT Pilot Program Act of 2023",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/794?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-97."
+            },
+            "laws": [
+                {
+                    "number": "118-97",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "679",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "GAO Database Modernization Act of 2023",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/679?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-96."
+            },
+            "laws": [
+                {
+                    "number": "118-96",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "670",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "IMPACTT Human Trafficking Act",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/670?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-95."
+            },
+            "laws": [
+                {
+                    "number": "118-95",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "656",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Veteran Improvement Commercial Driver License Act of 2023",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/656?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-94."
+            },
+            "laws": [
+                {
+                    "number": "118-94",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "612",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Lake Tahoe Restoration Reauthorization Act",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/612?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-93."
+            },
+            "laws": [
+                {
+                    "number": "118-93",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "134",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Alzheimer\u2019s Accountability and Investment Act",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/134?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-92."
+            },
+            "laws": [
+                {
+                    "number": "118-92",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "133",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "NAPA Reauthorization Act",
+            "type": "S",
+            "updateDate": "2024-10-05",
+            "updateDateIncludingText": "2024-10-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/133?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-10-01",
+                "text": "Became Public Law No: 118-91."
+            },
+            "laws": [
+                {
+                    "number": "118-91",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "9106",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Enhanced Presidential Security Act of 2024",
+            "type": "HR",
+            "updateDate": "2024-10-03",
+            "updateDateIncludingText": "2024-10-03",
+            "url": "https://api.congress.gov/v3/bill/118/hr/9106?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-26",
+                "text": "Became Public Law No: 118-83."
+            },
+            "laws": [
+                {
+                    "number": "118-83",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "9747",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Continuing Appropriations and Extensions Act, 2025",
+            "type": "HR",
+            "updateDate": "2024-10-02",
+            "updateDateIncludingText": "2024-10-02",
+            "url": "https://api.congress.gov/v3/bill/118/hr/9747?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-26",
+                "text": "Became Public Law No: 118-88."
+            },
+            "laws": [
+                {
+                    "number": "118-88",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2861",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Billie Jean King Congressional Gold Medal Act",
+            "type": "S",
+            "updateDate": "2024-09-29",
+            "updateDateIncludingText": "2024-09-29",
+            "url": "https://api.congress.gov/v3/bill/118/s/2861?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-26",
+                "text": "Became Public Law No: 118-87."
+            },
+            "laws": [
+                {
+                    "number": "118-87",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2825",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Dustoff Crews of the Vietnam War Congressional Gold Medal Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/2825?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-26",
+                "text": "Became Public Law No: 118-86."
+            },
+            "laws": [
+                {
+                    "number": "118-86",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "4351",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Poison Control Centers Reauthorization Act of 2024",
+            "type": "S",
+            "updateDate": "2024-10-03",
+            "updateDateIncludingText": "2024-10-03",
+            "url": "https://api.congress.gov/v3/bill/118/s/4351?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-26",
+                "text": "Became Public Law No: 118-85."
+            },
+            "laws": [
+                {
+                    "number": "118-85",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1648",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Launch Communications Act",
+            "type": "S",
+            "updateDate": "2024-10-03",
+            "updateDateIncludingText": "2024-10-03",
+            "url": "https://api.congress.gov/v3/bill/118/s/1648?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-26",
+                "text": "Became Public Law No: 118-84."
+            },
+            "laws": [
+                {
+                    "number": "118-84",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "265",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "SIREN Reauthorization Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/265?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-20",
+                "text": "Became Public Law No: 118-82."
+            },
+            "laws": [
+                {
+                    "number": "118-82",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "9468",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Veterans Benefits Continuity and Accountability Supplemental Appropriations Act, 2024",
+            "type": "HR",
+            "updateDate": "2024-09-23",
+            "updateDateIncludingText": "2024-09-23",
+            "url": "https://api.congress.gov/v3/bill/118/hr/9468?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-20",
+                "text": "Became Public Law No: 118-81."
+            },
+            "laws": [
+                {
+                    "number": "118-81",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "7377",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Royalty Resiliency Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/7377?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-18",
+                "text": "Became Public Law No: 118-43."
+            },
+            "laws": [
+                {
+                    "number": "118-43",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "206",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "END FENTANYL Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/206?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-13",
+                "text": "Became Public Law No: 118-80."
+            },
+            "laws": [
+                {
+                    "number": "118-80",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1608",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Starr\u2013Camargo Bridge Expansion Act",
+            "type": "S",
+            "updateDate": "2024-09-27",
+            "updateDateIncludingText": "2024-09-27",
+            "url": "https://api.congress.gov/v3/bill/118/s/1608?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-09-13",
+                "text": "Became Public Law No: 118-79."
+            },
+            "laws": [
+                {
+                    "number": "118-79",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1076",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Preventing the Financing of Illegal Synthetic Drugs Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1076?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-30",
+                "text": "Became Public Law No: 118-77."
+            },
+            "laws": [
+                {
+                    "number": "118-77",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3706",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Victims' VOICES Act",
+            "type": "S",
+            "updateDate": "2024-09-05",
+            "updateDateIncludingText": "2024-09-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/3706?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-30",
+                "text": "Became Public Law No: 118-76."
+            },
+            "laws": [
+                {
+                    "number": "118-76",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3285",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to rename the community-based outpatient clinic of the Department of Veterans Affairs in Butte, Montana, as the \"Charlie Dowd VA Clinic\".",
+            "type": "S",
+            "updateDate": "2024-09-05",
+            "updateDateIncludingText": "2024-09-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/3285?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-30",
+                "text": "Became Public Law No: 118-78."
+            },
+            "laws": [
+                {
+                    "number": "118-78",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "4548",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Foreign Extortion Prevention Technical Corrections Act",
+            "type": "S",
+            "updateDate": "2024-09-05",
+            "updateDateIncludingText": "2024-09-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/4548?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-30",
+                "text": "Became Public Law No: 118-75."
+            },
+            "laws": [
+                {
+                    "number": "118-75",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3249",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to designate the outpatient clinic of the Department of Veterans Affairs in Wyandotte County, Kansas City, Kansas, as the \"Captain Elwin Shopteese VA Clinic\".",
+            "type": "S",
+            "updateDate": "2024-09-05",
+            "updateDateIncludingText": "2024-09-05",
+            "url": "https://api.congress.gov/v3/bill/118/s/3249?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-30",
+                "text": "Became Public Law No: 118-74."
+            },
+            "laws": [
+                {
+                    "number": "118-74",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1973",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "All-American Flag Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/1973?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-30",
+                "text": "Became Public Law No: 118-73."
+            },
+            "laws": [
+                {
+                    "number": "118-73",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "227",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Improving Access to Our Courts Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/227?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-30",
+                "text": "Became Public Law No: 118-72."
+            },
+            "laws": [
+                {
+                    "number": "118-72",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1105",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Debbie Smith Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1105?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-25",
+                "text": "Became Public Law No: 118-71."
+            },
+            "laws": [
+                {
+                    "number": "118-71",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3019",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Federal Prison Oversight Act",
+            "type": "HR",
+            "updateDate": "2024-09-24",
+            "updateDateIncludingText": "2024-09-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3019?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-16",
+                "text": "Became Public Law No: 118-63."
+            },
+            "laws": [
+                {
+                    "number": "118-63",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3935",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "FAA Reauthorization Act of 2024",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3935?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-19",
+                "text": "Became Public Law No: 118-23."
+            },
+            "laws": [
+                {
+                    "number": "118-23",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1734",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "TRANQ Research Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1734?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-12",
+                "text": "Became Public Law No: 118-70."
+            },
+            "laws": [
+                {
+                    "number": "118-70",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "138",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Promoting a Resolution to the Tibet-China Dispute Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/138?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-12",
+                "text": "Became Public Law No: 118-69."
+            },
+            "laws": [
+                {
+                    "number": "118-69",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "4581",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Maternal and Child Health Stillbirth Prevention Act of 2024",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/4581?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-12",
+                "text": "Became Public Law No: 118-68."
+            },
+            "laws": [
+                {
+                    "number": "118-68",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1240",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Winnebago Land Transfer Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1240?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-09",
+                "text": "Became Public Law No: 118-67."
+            },
+            "laws": [
+                {
+                    "number": "118-67",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "870",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to authorize appropriations for the United States Fire Administration and firefighter assistance grant programs, to advance the benefits of nuclear energy, and for other purposes.",
+            "type": "S",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/s/870?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-07-02",
+                "text": "Became Public Law No: 118-66."
+            },
+            "laws": [
+                {
+                    "number": "118-66",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2365",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Dr. Emmanuel Bilirakis and Honorable Jennifer Wexton National Plan to End Parkinson\u2019s Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2365?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-26",
+                "text": "Became Public Law No: 118-34."
+            },
+            "laws": [
+                {
+                    "number": "118-34",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "6503",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Airport and Airway Extension Act of 2023, Part II",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/6503?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-06-17",
+                "text": "Became Public Law No: 118-65."
+            },
+            "laws": [
+                {
+                    "number": "118-65",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2051",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Missing Children\u2019s Assistance Reauthorization Act of 2023",
+            "type": "S",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/s/2051?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-13",
+                "text": "Became Public Law No: 118-62."
+            },
+            "laws": [
+                {
+                    "number": "118-62",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1042",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Prohibiting Russian Uranium Imports Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1042?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-13",
+                "text": "Became Public Law No: 118-61."
+            },
+            "laws": [
+                {
+                    "number": "118-61",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "593",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To rename the Department of Veterans Affairs community-based outpatient clinic in Hinesville, Georgia, as the \"John Gibson, Dan James, William Sapp, and Frankie Smiley VA Clinic\".",
+            "type": "HR",
+            "updateDate": "2024-06-11",
+            "updateDateIncludingText": "2024-06-11",
+            "url": "https://api.congress.gov/v3/bill/118/hr/593?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-10",
+                "text": "Became Public Law No: 118-60."
+            },
+            "laws": [
+                {
+                    "number": "118-60",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "8289",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Airport and Airway Extension Act of 2024, Part II",
+            "type": "HR",
+            "updateDate": "2024-08-14",
+            "updateDateIncludingText": "2024-08-14",
+            "url": "https://api.congress.gov/v3/bill/118/hr/8289?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-59."
+            },
+            "laws": [
+                {
+                    "number": "118-59",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "474",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "REPORT Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/474?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-58."
+            },
+            "laws": [
+                {
+                    "number": "118-58",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3947",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the facility of the United States Postal Service located at 859 North State Road 21 in Melrose, Florida, as the \"Pamela Jane Rock Post Office Building\".",
+            "type": "HR",
+            "updateDate": "2024-06-11",
+            "updateDateIncludingText": "2024-06-11",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3947?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-57."
+            },
+            "laws": [
+                {
+                    "number": "118-57",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3944",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the facility of the United States Postal Service located at 120 West Church Street in Mount Vernon, Georgia, as the \"Second Lieutenant Patrick Palmer Calhoun Post Office\".",
+            "type": "HR",
+            "updateDate": "2024-06-11",
+            "updateDateIncludingText": "2024-06-11",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3944?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-56."
+            },
+            "laws": [
+                {
+                    "number": "118-56",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3865",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the facility of the United States Postal Service located at 101 South 8th Street in Lebanon, Pennsylvania, as the \"Lieutenant William D. Lebo Post Office Building\".",
+            "type": "HR",
+            "updateDate": "2024-08-06",
+            "updateDateIncludingText": "2024-08-06",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3865?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-55."
+            },
+            "laws": [
+                {
+                    "number": "118-55",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2754",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the facility of the United States Postal Service located at 2395 East Del Mar Boulevard in Laredo, Texas, as the \"Lance Corporal David Lee Espinoza, Lance Corporal Juan Rodrigo Rodriguez & Sergeant Roberto Arizola Jr. Post Office Building\".",
+            "type": "HR",
+            "updateDate": "2024-08-02",
+            "updateDateIncludingText": "2024-08-02",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2754?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-54."
+            },
+            "laws": [
+                {
+                    "number": "118-54",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2379",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the facility of the United States Postal Service located at 616 East Main Street in St. Charles, Illinois, as the \"Veterans of the Vietnam War Memorial Post Office\".",
+            "type": "HR",
+            "updateDate": "2024-06-11",
+            "updateDateIncludingText": "2024-06-11",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2379?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-53."
+            },
+            "laws": [
+                {
+                    "number": "118-53",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "996",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the facility of the United States Postal Service located at 3901 MacArthur Blvd., in New Orleans, Louisiana, as the \"Dr. Rudy Lombard Post Office\".",
+            "type": "HR",
+            "updateDate": "2024-06-11",
+            "updateDateIncludingText": "2024-06-11",
+            "url": "https://api.congress.gov/v3/bill/118/hr/996?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-05-07",
+                "text": "Became Public Law No: 118-52."
+            },
+            "laws": [
+                {
+                    "number": "118-52",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "292",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the facility of the United States Postal Service located at 24355 Creekside Road in Santa Clarita, California, as the \"William L. Reynolds Post Office Building\".",
+            "type": "HR",
+            "updateDate": "2024-06-11",
+            "updateDateIncludingText": "2024-06-11",
+            "url": "https://api.congress.gov/v3/bill/118/hr/292?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-04-24",
+                "text": "Became Public Law No: 118-50."
+            },
+            "laws": [
+                {
+                    "number": "118-50",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "815",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Making emergency supplemental appropriations for the fiscal year ending September 30, 2024, and for other purposes.",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/815?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-04-24",
+                "text": "Became Public Law No: 118-51."
+            },
+            "laws": [
+                {
+                    "number": "118-51",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "4389",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Migratory Birds of the Americas Conservation Enhancements Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/4389?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-04-20",
+                "text": "Became Public Law No: 118-49."
+            },
+            "laws": [
+                {
+                    "number": "118-49",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "7888",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Reforming Intelligence and Securing America Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/7888?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-04-19",
+                "text": "Became Public Law No: 118-48."
+            },
+            "laws": [
+                {
+                    "number": "118-48",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "382",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Puyallup Tribe of Indians Land Into Trust Confirmation Act of 2023",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/382?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-23",
+                "text": "Became Public Law No: 118-47."
+            },
+            "laws": [
+                {
+                    "number": "118-47",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2882",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Further Consolidated Appropriations Act, 2024",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2882?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-22",
+                "text": "Became Public Law No: 118-45."
+            },
+            "laws": [
+                {
+                    "number": "118-45",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "992",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "I-27 Numbering Act of 2023",
+            "type": "S",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/s/992?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-22",
+                "text": "Became Public Law No: 118-46."
+            },
+            "laws": [
+                {
+                    "number": "118-46",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1278",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to designate the Federal building located at 985 Michigan Avenue in Detroit, Michigan, as the \"Rosa Parks Federal Building\", and for other purposes.",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/1278?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-18",
+                "text": "Became Public Law No: 118-44."
+            },
+            "laws": [
+                {
+                    "number": "118-44",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1858",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Disaster Assistance Deadlines Alignment Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/1858?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-08",
+                "text": "Became Public Law No: 118-41."
+            },
+            "laws": [
+                {
+                    "number": "118-41",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "7454",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Airport and Airway Extension Act of 2024",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/7454?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-09",
+                "text": "Became Public Law No: 118-42."
+            },
+            "laws": [
+                {
+                    "number": "118-42",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "4366",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Consolidated Appropriations Act, 2024",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/4366?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-01",
+                "text": "Became Public Law No: 118-40."
+            },
+            "laws": [
+                {
+                    "number": "118-40",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "7463",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Extension of Continuing Appropriations and Other Matters Act, 2024",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/7463?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-01-26",
+                "text": "Became Public Law No: 118-36."
+            },
+            "laws": [
+                {
+                    "number": "118-36",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3222",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to ensure the security of office space rented by Senators, and for other purposes.",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/3222?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-11-17",
+                "text": "Became Public Law No: 118-22."
+            },
+            "laws": [
+                {
+                    "number": "118-22",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "6363",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Further Continuing Appropriations and Other Extensions Act, 2024",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/6363?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-01-19",
+                "text": "Became Public Law No: 118-35."
+            },
+            "laws": [
+                {
+                    "number": "118-35",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2872",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Making further continuing appropriations for the fiscal year ending September 30, 2024, and for other purposes.",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2872?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-02-09",
+                "text": "Became Public Law No: 118-39."
+            },
+            "laws": [
+                {
+                    "number": "118-39",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1568",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Moving Americans Privacy Protection Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1568?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-02-06",
+                "text": "Became Public Law No: 118-38."
+            },
+            "laws": [
+                {
+                    "number": "118-38",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3427",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Overtime Pay for Protective Services Act of 2023",
+            "type": "S",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/s/3427?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-01-26",
+                "text": "Became Public Law No: 118-37."
+            },
+            "laws": [
+                {
+                    "number": "118-37",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3250",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to provide remote access to court proceedings for victims of the 1988 Bombing of Pan Am Flight 103 over Lockerbie, Scotland.",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/3250?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-22",
+                "text": "Became Public Law No: 118-31."
+            },
+            "laws": [
+                {
+                    "number": "118-31",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2670",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "National Defense Authorization Act for Fiscal Year 2024",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2670?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-26",
+                "text": "Became Public Law No: 118-32."
+            },
+            "laws": [
+                {
+                    "number": "118-32",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1722",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Grand Ronde Reservation Act Amendment of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1722?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-26",
+                "text": "Became Public Law No: 118-33."
+            },
+            "laws": [
+                {
+                    "number": "118-33",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2839",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To amend the Siletz Reservation Act to address the hunting, fishing, trapping, and animal gathering rights of the Confederated Tribes of Siletz Indians, and for other purposes.",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2839?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-21",
+                "text": "Became Public Law No: 118-29."
+            },
+            "laws": [
+                {
+                    "number": "118-29",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "63",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Providing for the appointment of Antoinette Bush as a citizen regent of the Board of Regents of the Smithsonian Institution.",
+            "type": "HJRES",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hjres/63?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-21",
+                "text": "Became Public Law No: 118-28."
+            },
+            "laws": [
+                {
+                    "number": "118-28",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "62",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Providing for the reappointment of Michael Govan as a citizen regent of the Board of Regents of the Smithsonian Institution.",
+            "type": "HJRES",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hjres/62?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-21",
+                "text": "Became Public Law No: 118-30."
+            },
+            "laws": [
+                {
+                    "number": "118-30",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "64",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Providing for the reappointment of Roger W. Ferguson as a citizen regent of the Board of Regents of the Smithsonian Institution.",
+            "type": "HJRES",
+            "updateDate": "2024-07-27",
+            "updateDateIncludingText": "2024-07-27",
+            "url": "https://api.congress.gov/v3/bill/118/hjres/64?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-19",
+                "text": "Became Public Law No: 118-27."
+            },
+            "laws": [
+                {
+                    "number": "118-27",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2787",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "5G SALE Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/2787?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-19",
+                "text": "Became Public Law No: 118-25."
+            },
+            "laws": [
+                {
+                    "number": "118-25",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "788",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Duck Stamp Modernization Act of 2023",
+            "type": "S",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/s/788?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-19",
+                "text": "Became Public Law No: 118-26."
+            },
+            "laws": [
+                {
+                    "number": "118-26",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2747",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to amend the Federal Election Campaign Act of 1971 to extend the Administrative Fine Program for certain reporting violations.",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/2747?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-12-19",
+                "text": "Became Public Law No: 118-24."
+            },
+            "laws": [
+                {
+                    "number": "118-24",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3315",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "National Guard and Reservists Debt Relief Extension Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3315?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-11-13",
+                "text": "Became Public Law No: 118-21."
+            },
+            "laws": [
+                {
+                    "number": "118-21",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1226",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Wounded Warrior Access Act",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1226?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-11-13",
+                "text": "Became Public Law No: 118-20."
+            },
+            "laws": [
+                {
+                    "number": "118-20",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "366",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Korean American VALOR Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/366?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-07-28",
+                "text": "Became Public Law No: 118-11."
+            },
+            "laws": [
+                {
+                    "number": "118-11",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "423",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Pala Band of Mission Indians Land Transfer Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/423?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-09-30",
+                "text": "Became Public Law No: 118-15."
+            },
+            "laws": [
+                {
+                    "number": "118-15",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "5860",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Continuing Appropriations Act, 2024 and Other Extensions Act",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/5860?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-10-06",
+                "text": "Became Public Law No: 118-17."
+            },
+            "laws": [
+                {
+                    "number": "118-17",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "5110",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Protecting Hunting Heritage and Education Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/5110?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-10-06",
+                "text": "Became Public Law No: 118-19."
+            },
+            "laws": [
+                {
+                    "number": "118-19",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2795",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to amend title 38, United States Code, to extend and modify certain authorities and requirements relating to the Department of Veterans Affairs, and for other purposes.",
+            "type": "S",
+            "updateDate": "2024-04-17",
+            "updateDateIncludingText": "2024-04-17",
+            "url": "https://api.congress.gov/v3/bill/118/s/2795?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-10-06",
+                "text": "Became Public Law No: 118-18."
+            },
+            "laws": [
+                {
+                    "number": "118-18",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "112",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to amend title 38, United States Code, to strengthen benefits for children of Vietnam veterans born with spina bifida, and for other purposes.",
+            "type": "S",
+            "updateDate": "2024-04-17",
+            "updateDateIncludingText": "2024-04-17",
+            "url": "https://api.congress.gov/v3/bill/118/s/112?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-10-02",
+                "text": "Became Public Law No: 118-16."
+            },
+            "laws": [
+                {
+                    "number": "118-16",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "475",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "A bill to designate the clinic of the Department of Veterans Affairs in Gallup, New Mexico, as the Hiroshi \"Hershey\" Miyamura VA Clinic.",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/475?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-03-20",
+                "text": "Became Public Law No: 118-2."
+            },
+            "laws": [
+                {
+                    "number": "118-2",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "619",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "COVID-19 Origin Act of 2023",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/619?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-09-22",
+                "text": "Became Public Law No: 118-14."
+            },
+            "laws": [
+                {
+                    "number": "118-14",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "2544",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Securing the U.S. Organ Procurement and Transplantation Network Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/2544?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-08-07",
+                "text": "Became Public Law No: 118-13."
+            },
+            "laws": [
+                {
+                    "number": "118-13",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "4004",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "United States-Taiwan Initiative on 21st-Century Trade First Agreement Implementation Act",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/4004?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-04-10",
+                "text": "Became Public Law No: 118-3."
+            },
+            "laws": [
+                {
+                    "number": "118-3",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "7",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Relating to a national emergency declared by the President on March 13, 2020.",
+            "type": "HJRES",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hjres/7?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-06-03",
+                "text": "Became Public Law No: 118-5."
+            },
+            "laws": [
+                {
+                    "number": "118-5",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3746",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Fiscal Responsibility Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3746?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-07-28",
+                "text": "Became Public Law No: 118-12."
+            },
+            "laws": [
+                {
+                    "number": "118-12",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "3672",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "To designate the clinic of the Department of Veterans Affairs in Indian River, Michigan, as the \"Pfc. Justin T. Paton Department of Veterans Affairs Clinic\".",
+            "type": "HR",
+            "updateDate": "2024-06-12",
+            "updateDateIncludingText": "2024-06-12",
+            "url": "https://api.congress.gov/v3/bill/118/hr/3672?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-07-26",
+                "text": "Became Public Law No: 118-10."
+            },
+            "laws": [
+                {
+                    "number": "118-10",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "1096",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "250th Anniversary of the United States Marine Corps Commemorative Coin Act",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/1096?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-07-25",
+                "text": "Became Public Law No: 118-9."
+            },
+            "laws": [
+                {
+                    "number": "118-9",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "111",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Providing Accountability Through Transparency Act of 2023",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/111?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-07-18",
+                "text": "Became Public Law No: 118-8."
+            },
+            "laws": [
+                {
+                    "number": "118-8",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "30",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Fiscal Year 2023 Veterans Affairs Major Medical Facility Authorization Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/30?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-06-30",
+                "text": "Became Public Law No: 118-7."
+            },
+            "laws": [
+                {
+                    "number": "118-7",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "467",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "CADETS Act",
+            "type": "S",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/s/467?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-06-14",
+                "text": "Became Public Law No: 118-6."
+            },
+            "laws": [
+                {
+                    "number": "118-6",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "777",
+            "originChamber": "Senate",
+            "originChamberCode": "S",
+            "title": "Veterans' COLA Act of 2023",
+            "type": "S",
+            "updateDate": "2024-08-30",
+            "updateDateIncludingText": "2024-08-30",
+            "url": "https://api.congress.gov/v3/bill/118/s/777?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-06-03",
+                "text": "Became Public Law No: 118-4."
+            },
+            "laws": [
+                {
+                    "number": "118-4",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "346",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "NOTAM Improvement Act of 2023",
+            "type": "HR",
+            "updateDate": "2024-07-24",
+            "updateDateIncludingText": "2024-07-24",
+            "url": "https://api.congress.gov/v3/bill/118/hr/346?format=json"
+        },
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2023-03-20",
+                "text": "Became Public Law No: 118-1."
+            },
+            "laws": [
+                {
+                    "number": "118-1",
+                    "type": "Public Law"
+                }
+            ],
+            "number": "26",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Disapproving the action of the District of Columbia Council in approving the Revised Criminal Code Act of 2022.",
+            "type": "HJRES",
+            "updateDate": "2024-10-04",
+            "updateDateIncludingText": "2024-10-04",
+            "url": "https://api.congress.gov/v3/bill/118/hjres/26?format=json"
+        }
+    ],
+    "pagination": {
+        "count": 105
+    },
+    "request": {
+        "congress": "118",
+        "contentType": "application/json",
+        "format": "json"
+    }
+}
