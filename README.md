@@ -1,1 +1,1 @@
-# ElevenLabs-Audio-Hackathon
+# ElevenLabs Audio Hackathon

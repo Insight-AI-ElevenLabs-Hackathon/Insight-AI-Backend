@@ -2,3 +2,22 @@ Time Range: 1month,3month,6month,12months
 Number: Bill Number
 OriginHouse:
 Title:
+
+Example Format:
+{
+    "bills": [
+        {
+            "congress": 118,
+            "latestAction": {
+                "actionDate": "2024-03-29",
+                "text": "Referred to the House Committee on Energy and Commerce."
+            },
+            "number": "7848",
+            "originChamber": "House",
+            "originChamberCode": "H",
+            "title": "Right Drug Dose Now Act of 2024",
+            "type": "HR",
+            "updateDate": "2024-06-11",
+            "updateDateIncludingText": "2024-06-11",
+            "url": "https://api.congress.gov/v3/bill/118/hr/7848?format=json"
+        },
