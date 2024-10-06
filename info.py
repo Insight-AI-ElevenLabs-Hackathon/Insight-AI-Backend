@@ -1,78 +1,158 @@
 import requests
+import os
+import google.generativeai as genai
+from google.generativeai.types import HarmBlockThreshold, HarmCategory
 import re
 import json
 
-# Replace with your actual API key
-api_key = "TNMSLQibAQP7Lf0NFvypJn5dd8F8hZbwMdyo2Szz"
-
-# Define API parameters
-params = {
-    "format": "json",
-    "api_key": api_key,
-}
-
-# Construct the base API URLs
-base_bill_url = "https://api.congress.gov/v3/bill"
-base_text_url = "https://api.congress.gov/v3/bill"  # Same base URL, different endpoint
-
-# Specify the bill details
-congress = "118"
-bill_type = "hr"
-bill_number = "7848"
-
-# Construct the complete API URLs
-bill_url = f"{base_bill_url}/{congress}/{bill_type}/{bill_number}"
-text_url = f"{base_text_url}/{congress}/{bill_type}/{bill_number}/text"
-
-
-def get_bill_info(bill_url, params):
-    """Retrieves and prints bill information from the API."""
+def process_bill_url(url):
+    """Processes a bill URL and returns a JSON object with bill info and summary."""
     try:
-        response_bill = requests.get(bill_url, params=params)
-        response_bill.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+        # Extract bill info from URL
+        congress, bill_type, bill_number = extract_bill_info_from_url(url)
 
-        bill_data = response_bill.json()["bill"]
+        # Get bill information
+        bill_info = get_bill_info(congress, bill_type, bill_number)
 
-        print(f"Title: {bill_data['title']} ({bill_data['number']})")
-        print(f"Introduced Date: {bill_data['introducedDate']}")
-        print(f"Latest Action: {bill_data['latestAction']['text']} ({bill_data['latestAction']['actionDate']})")
-        print(f"Origin: {bill_data['originChamber']}")
+        if bill_info:
+            htm_links = get_bill_text_links(congress, bill_type, bill_number)
+            if htm_links:
+                bill_info['summary'] = summarize_bill_text(htm_links)
+            else:
+                bill_info['summary'] = "No HTML links found for bill text."
 
-        # Check if policyArea exists before accessing
-        if "policyArea" in bill_data:
-            print(f"Policy Area: {bill_data['policyArea']['name']}")
+            return bill_info
+        else:
+            return {'error': 'Failed to retrieve bill information'}
 
-        # Check if sponsors list is not empty before accessing
-        if bill_data['sponsors']:
-            print(f"Sponsor: {bill_data['sponsors'][0]['fullName']} (ID: {bill_data['sponsors'][0]['bioguideId']})")
+    except ValueError as e:
+        return {'error': str(e)}
+    except requests.exceptions.RequestException as e:
+        return {'error': f'API request error: {e}'}
+    except Exception as e:
+        return {'error': f'An unexpected error occurred: {e}'}
 
-        return bill_data
+# Helper functions
 
+def configure_generative_model():
+    """Configures the generative AI model for summarization."""
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    return genai.GenerativeModel(
+        model_name="gemini-1.5-flash-exp-0827",
+        generation_config={
+            "temperature": 0.7,
+            "top_p": 0.95,
+            "top_k": 64,
+            "max_output_tokens": 1000,
+            "response_mime_type": "text/plain",
+        },
+        safety_settings={
+            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+        },
+        system_instruction=(
+            "Your task is to analyze the legislative data provided to you and rewrite it into a detailed summary without any legislative jargon \
+                so that a normal citizen can understand what it is about. Be clear and concise. Write a 5-7 point summary."
+        ),
+    )
+
+
+def get_api_params():
+    """Returns the common API parameters for requests."""
+    return {
+        "format": "json",
+        "api_key": os.getenv("CONGRESS_API_KEY"),
+    }
+
+
+def get_bill_info(congress, bill_type, bill_number):
+    """Retrieves information about a specific bill."""
+    bill_url = f"https://api.congress.gov/v3/bill/{congress}/{bill_type}/{bill_number}"
+    params = get_api_params()
+    try:
+        response = requests.get(bill_url, params=params)
+        response.raise_for_status()
+        bill_data = response.json().get("bill", {})
+        return parse_bill_info(bill_data)
     except requests.exceptions.RequestException as e:
         print(f"Error getting bill information: {e}")
         return None
 
 
-def get_bill_text_links(text_url, params):
-    """Retrieves bill text and extracts .htm links."""
+def parse_bill_info(bill_data):
+    """Parses bill information from API response data."""
+    info = {
+        "title": bill_data.get("title"),
+        "number": bill_data.get("number"),
+        "introduced_date": bill_data.get("introducedDate"),
+        "latest_action": bill_data.get("latestAction", {}).get("text"),
+        "latest_action_date": bill_data.get("latestAction", {}).get("actionDate"),
+        "origin_chamber": bill_data.get("originChamber"),
+        "policy_area": bill_data.get("policyArea", {}).get("name"),
+        "sponsor": bill_data.get("sponsors", [{}])[0].get("fullName"),
+        "sponsor_id": bill_data.get("sponsors", [{}])[0].get("bioguideId"),
+        # Add a field to indicate whether it's a bill or law
+        "bill_or_law": "bill"  # Default to "bill"
+    }
+
+    # Check if the bill has become a law
+    if "laws" in bill_data and bill_data["laws"]:
+        info["bill_or_law"] = "law"
+        info["law_number"] = bill_data["laws"][0].get("number")
+        info["law_type"] = bill_data["laws"][0].get("type")
+
+    return info
+
+
+def get_bill_text_links(congress, bill_type, bill_number):
+    """Gets links to the HTML content of the bill text."""
+    text_url = f"https://api.congress.gov/v3/bill/{congress}/{bill_type}/{bill_number}/text"
+    params = get_api_params()
     try:
-        response_text = requests.get(text_url, params=params)
-        response_text.raise_for_status()
-
-        text_data = json.dumps(response_text.json())
-
-        htm_links = re.findall(r'https://www\.congress\.gov/\S+\.htm', text_data)
-
-        print("HTM Links:", htm_links)
-        return htm_links
-
+        response = requests.get(text_url, params=params)
+        response.raise_for_status()
+        text_data = json.dumps(response.json())
+        return re.findall(r'https://www\.congress\.gov/\S+\.htm', text_data)
     except requests.exceptions.RequestException as e:
         print(f"Error getting bill text: {e}")
         return []
 
 
-# --- Main execution ---
-if __name__ == "__main__":
-    bill_info = get_bill_info(bill_url, params)
-    if bill_info:
-        get_bill_text_links(text_url, params) 
+def summarize_bill_text(htm_links):
+    """Loads and summarizes the content of the bill text."""
+    combined_content = ""
+    for link in htm_links:
+        try:
+            response = requests.get(link)
+            response.raise_for_status()
+            combined_content += response.text + "\n\n" 
+        except requests.exceptions.RequestException as e:
+            print(f"Error loading {link}: {e}")
+
+    if combined_content:
+        model = configure_generative_model()
+        summary = model.generate_content(combined_content)
+        return summary.text if summary else "No summary generated."
+    else:
+        return "No content available for summarization."
+
+
+def extract_bill_info_from_url(url):
+    """Extracts congress, bill type, and bill number from a congress.gov or api.congress.gov URL."""
+    pattern = r"(?:https?://(?:www\.)?congress\.gov/bill/(\d+)(?:th|rd|nd|st)-congress/(?:senate|house)-bill/(\d+)|https?://api\.congress\.gov/v3/bill/(\d+)/(hr|s)/(\d+))"
+    match = re.search(pattern, url)
+
+    if match:
+        if match.group(1):  # Congress.gov URL
+            congress = match.group(1)
+            bill_type = "s" if "senate" in url else "hr"
+            bill_number = match.group(2)
+        else:  # API URL
+            congress = match.group(3)
+            bill_type = match.group(4)
+            bill_number = match.group(5)
+        return congress, bill_type, bill_number
+    else:
+        raise ValueError("Invalid URL format. Must be a Congress.gov or API URL.")

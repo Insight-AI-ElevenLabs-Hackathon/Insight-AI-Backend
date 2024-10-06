@@ -13,10 +13,12 @@ R2_ACCESS_KEY = os.getenv("R2_ACCESS_KEY")
 R2_SECRET_KEY = os.getenv("R2_SECRET_KEY")
 R2_ENDPOINT = os.getenv("R2_ENDPOINT")
 R2_BUCKET = "elevenlabs-hackathon"
-R2_FILE_KEY = "bills.json"
+R2_BILLS_FILE_KEY = "bills.json"  # File key for bills
+R2_LAWS_FILE_KEY = "laws.json"  # File key for laws
 
 # API endpoint and parameters
-base_url = "https://api.congress.gov/v3/bill/118"
+base_url_bills = "https://api.congress.gov/v3/bill/118"
+base_url_laws = "https://api.congress.gov/v3/law/118"  # Changed to law
 params = {
     "format": "json",
     "limit": 250,
@@ -33,30 +35,31 @@ s3 = boto3.client(
 )
 
 
-def load_existing_data():
+def load_existing_data(file_key, item_type="bill"):
     """Load existing data from Cloudflare R2."""
     try:
-        response = s3.get_object(Bucket=R2_BUCKET, Key=R2_FILE_KEY)
-        return json.loads(response['Body'].read())["bills"]
+        response = s3.get_object(Bucket=R2_BUCKET, Key=file_key)
+        data = json.loads(response['Body'].read())
+        return data.get(item_type + "s", [])  # Access "bills" or "laws" key
     except s3.exceptions.NoSuchKey:
-        print("Data file not found in R2. Starting fresh.")
+        print(f"Data file {file_key} not found in R2. Starting fresh.")
         return []
     except (KeyError, json.JSONDecodeError) as e:
-        print(f"Error loading existing data: {e}. Starting fresh.")
+        print(f"Error loading existing data from {file_key}: {e}. Starting fresh.")
         return []
 
 
-def save_data(all_bills):
+def save_data(items, file_key, item_type="bill"):
     """Save the updated and sorted data to Cloudflare R2."""
     try:
         s3.put_object(
             Bucket=R2_BUCKET,
-            Key=R2_FILE_KEY,
-            Body=json.dumps({"bills": all_bills}, indent=4)
+            Key=file_key,
+            Body=json.dumps({item_type + "s": items}, indent=4)  # Save under "bills" or "laws"
         )
-        print(f"Data saved successfully to R2. Total bills: {len(all_bills)}")
+        print(f"Data saved successfully to R2 ({file_key}). Total {item_type}s: {len(items)}")
     except (BotoCoreError, NoCredentialsError) as e:
-        print(f"Error saving data to R2: {e}")
+        print(f"Error saving data to R2 ({file_key}): {e}")
 
 
 def fetch_data_from_api(url, params):
@@ -84,45 +87,45 @@ def fetch_data_from_api(url, params):
             return None
 
 
-def update_bills(existing_bills, new_bills):
-    """Update the existing bills with new data and stop if a match without updates is found."""
+def update_items(existing_items, new_items, key_field="number"):
+    """Update the existing items with new data and stop if a match without updates is found."""
     updated = False
-    for new_bill in new_bills:
+    for new_item in new_items:
         found_match = False
-        for i, existing_bill in enumerate(existing_bills):
-            if new_bill["number"] == existing_bill["number"] and new_bill["type"] == existing_bill["type"]:
-                if new_bill["updateDate"] > existing_bill["updateDate"]:
-                    existing_bills[i] = new_bill  # Update existing bill
-                    print(f"Updated bill: {new_bill['number']} ({new_bill['type']})")
+        for i, existing_item in enumerate(existing_items):
+            if new_item[key_field] == existing_item[key_field]:
+                if new_item["updateDate"] > existing_item["updateDate"]:
+                    existing_items[i] = new_item  # Update existing item
+                    print(f"Updated item: {new_item[key_field]}")
                     updated = True
                 found_match = True
                 break
         if not found_match:
-            existing_bills.insert(0, new_bill)  # Add new bill at the beginning
+            existing_items.insert(0, new_item)  # Add new item at the beginning
             updated = True
-            print(f"Added new bill: {new_bill['number']} ({new_bill['type']})")
+            print(f"Added new item: {new_item[key_field]}")
         elif found_match and not updated:
-            # If a matching bill is found and no updates were needed, stop further processing
+            # If a matching item is found and no updates were needed, stop further processing
             print("Match found with no updates needed. Stopping early to avoid unnecessary downloads.")
             return updated, True
 
     return updated, False
 
 
-def sort_bills_by_date(bills):
-    """Sort bills by updateDateIncludingText in descending order."""
-    return sorted(bills, key=lambda bill: bill['updateDateIncludingText'], reverse=True)
+def sort_items_by_date(items):
+    """Sort items by updateDateIncludingText in descending order."""
+    return sorted(items, key=lambda item: item['updateDateIncludingText'], reverse=True)
 
 
-def fetch_and_update_data():
+def fetch_and_update_data(base_url, file_key, item_type="bill"):
     """Fetches data from the API and updates the existing data in Cloudflare R2."""
 
     # Load existing data
-    all_bills = load_existing_data()
+    all_items = load_existing_data(file_key, item_type)
 
     # Get the last update date from the existing data (or a default date)
-    if all_bills:
-        last_update_date = datetime.fromisoformat(all_bills[0]["updateDate"])
+    if all_items:
+        last_update_date = datetime.fromisoformat(all_items[0]["updateDate"])
     else:
         last_update_date = datetime(2024, 4, 7)  # Default start date
 
@@ -132,26 +135,26 @@ def fetch_and_update_data():
     url = base_url
     updated = False
 
-    with tqdm(desc="Updating bills", unit="bill") as pbar:
+    with tqdm(desc=f"Updating {item_type}s", unit=item_type) as pbar:
         while url:
             data = fetch_data_from_api(url, params)
             if data is None:
                 break  # Exit if the request failed
 
-            new_bills = data.get("bills", [])
-            if not new_bills:
-                print("No new bills found.")
+            new_items = data.get("bills" if item_type == "bill" else "laws", [])  # Get bills or laws
+            if not new_items:
+                print(f"No new {item_type}s found.")
                 break
 
-            # Check for matching bills and update/add as needed
-            updated, stop_early = update_bills(all_bills, new_bills)
+            # Check for matching items and update/add as needed
+            updated, stop_early = update_items(all_items, new_items)
 
             # Stop fetching if a match with no update is found
             if stop_early:
                 break
 
             # Update progress bar
-            pbar.update(len(new_bills))
+            pbar.update(len(new_items))
 
             # Get the next page URL
             pagination = data.get("pagination")
@@ -162,18 +165,19 @@ def fetch_and_update_data():
             else:
                 url = None
 
-    # Sort the bills by updateDateIncludingText in descending order
-    all_bills = sort_bills_by_date(all_bills)
+    # Sort the items by updateDateIncludingText in descending order
+    all_items = sort_items_by_date(all_items)
 
     # Save the updated and sorted data
     if updated:
-        save_data(all_bills)
+        save_data(all_items, file_key, item_type)  # Pass item_type to save_data
 
-    if all_bills:
-        print(f"Data updated successfully. Last updated bill: {all_bills[0]['updateDate']}")
+    if all_items:
+        print(f"Data updated successfully. Last updated {item_type}: {all_items[0]['updateDate']}")
     else:
-        print("No data available.")
+        print(f"No {item_type} data available.")
 
 
-# Run the update function
-fetch_and_update_data()
+# Run the update function for bills and laws
+fetch_and_update_data(base_url_bills, R2_BILLS_FILE_KEY, "bill")
+fetch_and_update_data(base_url_laws, R2_LAWS_FILE_KEY, "law")

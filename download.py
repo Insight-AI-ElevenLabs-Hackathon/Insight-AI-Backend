@@ -5,7 +5,7 @@ import os
 from tqdm import tqdm
 
 # API endpoint and parameters
-base_url = "https://api.congress.gov/v3/bill/118"
+base_url = "https://api.congress.gov/v3/law/118"
 params = {
     "format": "json",
     "limit": 250,
