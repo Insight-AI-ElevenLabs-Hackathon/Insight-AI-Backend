@@ -1,13 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 from info import process_bill_url
-from urllib.parse import unquote  # Import for URL decoding
+from urllib.parse import unquote
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Flask API endpoint
 @app.route('/info/<path:url>', methods=['GET'])
-def summarize_bill(url):
-    """Summarizes a bill based on the provided URL."""
+def info(url):
 
     # Decode the URL (in case it contains encoded characters)
     decoded_url = unquote(url)
