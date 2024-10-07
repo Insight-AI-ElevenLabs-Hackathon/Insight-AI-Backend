@@ -13,12 +13,12 @@ R2_ACCESS_KEY = os.getenv("R2_ACCESS_KEY")
 R2_SECRET_KEY = os.getenv("R2_SECRET_KEY")
 R2_ENDPOINT = os.getenv("R2_ENDPOINT")
 R2_BUCKET = "elevenlabs-hackathon"
-R2_BILLS_FILE_KEY = "bills.json"  # File key for bills
-R2_LAWS_FILE_KEY = "laws.json"  # File key for laws
+R2_BILLS_FILE_KEY = "bills.json"
+R2_LAWS_FILE_KEY = "laws.json"
 
 # API endpoint and parameters
 base_url_bills = "https://api.congress.gov/v3/bill/118"
-base_url_laws = "https://api.congress.gov/v3/law/118"  # Changed to law
+base_url_laws = "https://api.congress.gov/v3/law/118"
 params = {
     "format": "json",
     "limit": 250,

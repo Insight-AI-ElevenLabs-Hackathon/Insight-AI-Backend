@@ -99,11 +99,9 @@ def main(content):
 
     audio_data, subtitles = generate_audio(speech_text)
 
-    # Save the audio file
     with open('output.mp3', 'wb') as f:
         f.write(audio_data)
 
-    # Save the subtitles to a file
     with open('output.srt', 'w') as f:
         f.write(subtitles)
 
