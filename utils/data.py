@@ -2,6 +2,8 @@ import json
 import os
 import boto3
 from botocore.exceptions import ClientError
+import re
+from datetime import datetime
 
 # Cloudflare R2 Configuration (AWS S3 Compatible)
 R2_ACCESS_KEY = os.getenv("R2_ACCESS_KEY")
@@ -32,28 +34,40 @@ def load_data_from_r2(key):
 
 
 def get_top_items(data, item_type, count=10):
-    """Extracts the top 'count' items based on updateDateIncludingText or updateDate."""
-    if data and item_type + "s" in data:
-        items = data[item_type + "s"]
-        sort_key = (
-            "updateDateIncludingText"
-            if "updateDateIncludingText" in items[0]
-            else "updateDate"
-        )
-        sorted_items = sorted(items, key=lambda item: item[sort_key], reverse=True)
+    """Extracts the top 'count' items based on lastModified, converting the date format."""
+    if data and "packages" in data:
+        items = data["packages"]
+        sorted_items = sorted(items, key=lambda item: item["lastModified"], reverse=True)
         return [
             {
                 "congress": item["congress"],
-                "number": item["number"],
+                "number": extract_number_from_packageId(item["packageId"]),
                 "title": item["title"],
-                "type": item["type"],
-                "updateDate": item["updateDate"],
-                "url": item["url"],
-                **({"laws": item["laws"]} if item_type == "law" and "laws" in item else {}),
+                "type": item["docClass"],
+                "updateDate": format_date(item["lastModified"]), # Format the date
+                "url": item["packageLink"],
             }
             for item in sorted_items[:count]
         ]
     return []
+
+
+def format_date(date_string):
+    """Converts the date string from YYYY-MM-DD'T'hh:mm:ssZ to YYYY-MM-DD."""
+    try:
+        date_object = datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%SZ") 
+        return date_object.strftime("%Y-%m-%d") 
+    except ValueError:
+        print(f"Error formatting date: {date_string}")
+        return date_string # Return the original string if formatting fails
+
+def extract_number_from_packageId(packageId):
+    """Extracts the number from the packageId using regular expressions."""
+    match = re.search(r"[a-z]+(\d+)", packageId)  # Find digits after letters
+    if match:
+        return match.group(1)
+    else:
+        return None  # Return None if no number is found
 
 
 def update_data_in_r2(data, key):
@@ -73,7 +87,7 @@ def main():
     laws_data = load_data_from_r2(R2_LAWS_KEY)
 
     top_bills = get_top_items(bills_data, "bill")
-    top_laws = get_top_items(laws_data, "bill")
+    top_laws = get_top_items(laws_data, "law")
 
     data_to_save = {"top_bills": top_bills, "top_laws": top_laws}
     update_data_in_r2(data_to_save, R2_DATA_KEY)

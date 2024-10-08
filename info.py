@@ -1,52 +1,161 @@
-import requests
-import os
-import google.generativeai as genai
-from google.generativeai.types import HarmBlockThreshold, HarmCategory
-import re
-import json
 import hashlib
 import http.client
+import json
+import logging
+import os
+import re
+from functools import lru_cache
 
+import google.generativeai as genai
+import requests
+from google.generativeai.types import HarmBlockThreshold, HarmCategory
+
+# Constants
+GOVINFO_API_KEY = os.getenv("GOVINFO_API_KEY")
+GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
+CLOUDFLARE_API_TOKEN = os.environ["CLOUDFLARE_API_TOKEN"]
+CLOUDFLARE_ACCOUNT_ID = os.environ["CLOUDFLARE_ACCOUNT_ID"]
+CLOUDFLARE_KV_NAMESPACE_ID = os.environ["CLOUDFLARE_KV_NAMESPACE_ID"]
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Configure session for API requests
 session = requests.Session()
 
+
 def process_bill_url(url):
-    """Processes a bill URL and returns a JSON object with bill info and summary."""
+    """Process a bill URL and return a JSON object with bill info and summary."""
     try:
-        # Check if bill info already exists in KV
-        existing_bill_info = get_bill_info_from_kv(url)
-        if existing_bill_info:
-            print("Bill info retrieved from KV.")
-            return existing_bill_info
+        if not is_valid_govinfo_url(url):
+            raise ValueError("Invalid URL format. Must be a Govinfo API URL.")
 
-        # Extract bill info from URL
-        congress, bill_type, bill_number = extract_bill_info_from_url(url)
+        # Check KV for existing entry before doing anything else
+        uid = generate_uid_from_url(url)
+        if get_bill_info_from_kv(uid):
+            return get_bill_info_from_kv(uid)
 
-        # Get bill information
-        bill_info = get_bill_info(congress, bill_type, bill_number)
+        bill_type = get_bill_type_from_url(url)  # Determine if it's a bill or law
+
+        if bill_type == "bill":
+            bill_info, download_link = get_bill_info(url)
+        elif bill_type == "law":
+            bill_info, download_link = get_law_info(url)
+        else:
+            return {'error': 'Unsupported bill type'}
+
         if not bill_info:
             return {'error': 'Failed to retrieve bill information'}
 
-        # Get and summarize bill text
-        htm_links = get_bill_text_links(congress, bill_type, bill_number)
-        bill_info['summary'] = summarize_bill_text(htm_links) if htm_links else "No HTML links found for bill text."
+        if download_link:
+            htm_link = f"{download_link}?api_key={GOVINFO_API_KEY}"
+            summary, _ = summarize_bill_text(htm_link, url)  # UID already generated 
+            bill_info['summary'] = summary
+        else:
+            bill_info['summary'] = "No HTML link found for bill text."
 
-        # Store bill info in KV
+        # Add json_type to the final output
+        bill_info['json_type'] = bill_type
+
         store_bill_info_in_kv(bill_info, url)
-
         return bill_info
 
     except ValueError as e:
+        logger.error(f"Value error: {e}")
         return {'error': str(e)}
     except requests.exceptions.RequestException as e:
+        logger.error(f"API request error: {e}")
         return {'error': f'API request error: {e}'}
     except Exception as e:
+        logger.error(f"Unexpected error: {e}")
         return {'error': f'An unexpected error occurred: {e}'}
 
-# Helper functions
 
-def configure_generative_model():
-    """Configures the generative AI model for summarization."""
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+def get_bill_info(url):
+    """Retrieve information about a specific bill from Govinfo API."""
+    try:
+        response = session.get(f"{url}?api_key={GOVINFO_API_KEY}")
+        response.raise_for_status()
+        bill_info, download_link = parse_bill_info(response.json())
+        return bill_info, download_link
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error getting bill information: {e}")
+        return None, None
+
+
+def parse_bill_info(bill_data):
+    """Parse bill information from Govinfo API response data (for bills)."""
+    info = {
+        "introduced_date": bill_data.get("dateIssued"),
+        "origin_chamber": bill_data.get("originChamber"),
+        "currentChamber": bill_data.get("currentCHamber"),
+        "session": bill_data.get("session"),
+        "policy_area": bill_data.get("branch"),
+        "type": "bill",  # Explicitly set type to "bill"
+    }
+
+    if members := bill_data.get("members"):
+        sponsor = members[0]
+        info.update({
+            "sponsor": sponsor.get("memberName"),
+            "sponsor_state": sponsor.get("state"),
+            "sponsor_party": sponsor.get("party"),
+            "sponsor_id": sponsor.get("bioGuideId"),
+        })
+    # Store the download link separately, not in the info dictionary
+    download_link = None
+    if download_links := bill_data.get("download"):
+        download_link = download_links.get('txtLink')
+    return info, download_link
+
+
+def get_law_info(url):
+    """Retrieve information about a specific law from Govinfo API."""
+    try:
+        response = session.get(f"{url}?api_key={GOVINFO_API_KEY}")
+        response.raise_for_status()
+        law_info, download_link = parse_law_info(response.json())
+        return law_info, download_link
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error getting law information: {e}")
+        return None, None
+
+
+def parse_law_info(law_data):
+    """Parse law information from Govinfo API response data (for laws)."""
+    info = {
+        "law_type": law_data.get("documentType"),
+        "dateIssued": law_data.get("dateIssued"),
+        "policy_area": law_data.get("branch")
+    }
+
+    #  Handle download links for laws (if available)
+    download_link = None
+    if download_links := law_data.get("download"):
+        download_link = download_links.get('txtLink')
+    return info, download_link
+
+
+def summarize_bill_text(htm_link, url):
+    """Load and summarize the content of the bill text."""
+    try:
+        response = session.get(htm_link)
+        response.raise_for_status()
+        if response.text:
+            summary = generate_summary(response.text)
+            uid = generate_uid_from_url(url)
+            return summary, uid
+        return "No content available for summarization.", None
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error loading {htm_link}: {e}")
+        return "Error loading bill text for summarization.", None
+
+
+@lru_cache(maxsize=1)
+def get_model():
+    """Configure and return the generative AI model for summarization."""
+    genai.configure(api_key=GEMINI_API_KEY)
     return genai.GenerativeModel(
         model_name="gemini-1.5-flash-exp-0827",
         generation_config={
@@ -62,151 +171,83 @@ def configure_generative_model():
             HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
             HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
         },
-        system_instruction=(
-            "Your task is to analyze the legislative data provided to you and rewrite it into a detailed summary without any legislative jargon "
-            "so that a normal citizen can understand what it is about. Be clear and concise. Write a 5-7 point summary."
-        ),
+        system_instruction="""
+        1. Analyze the provided legislative data and rewrite it into a clear, detailed summary that any citizen can easily understand.
+        2. Explain what are the changes that are happening with this bill/law/amendment.
+        3. Stay neutral about the political views and simply be an effective summarizer for normal citizens.
+        4. Avoid legislative jargon and focus on simplifying complex terms.
+        5. Provide a summary in 5 to 7 bullet points, being concise and highlighting the key aspects.
+
+                Respond in markdown format. Do not add any pretext and greetings at the end or beginning of the summary.
+                Just return the points.
+                Do not include any backticks (```) for formatting.
+                """
     )
 
-# Cache the model configuration for reuse
-model = configure_generative_model()
 
-def get_api_params():
-    """Returns the common API parameters for requests."""
-    return {
-        "format": "json",
-        "api_key": os.getenv("CONGRESS_API_KEY"),
-    }
+def generate_summary(text):
+    """Generate a summary using the AI model."""
+    model = get_model()
+    summary = model.generate_content(text)
+    return summary.text if summary else "No summary generated."
 
-def get_bill_info(congress, bill_type, bill_number):
-    """Retrieves information about a specific bill."""
-    bill_url = f"https://api.congress.gov/v3/bill/{congress}/{bill_type}/{bill_number}"
-    params = get_api_params()
-    try:
-        response = session.get(bill_url, params=params)
-        response.raise_for_status()
-        bill_data = response.json().get("bill", {})
-        return parse_bill_info(bill_data)
-    except requests.exceptions.RequestException as e:
-        print(f"Error getting bill information: {e}")
-        return None
 
-def parse_bill_info(bill_data):
-    """Parses bill information from API response data."""
-    info = {
-        "title": bill_data.get("title"),
-        "number": bill_data.get("number"),
-        "introduced_date": bill_data.get("introducedDate"),
-        "latest_action": bill_data.get("latestAction", {}).get("text"),
-        "latest_action_date": bill_data.get("latestAction", {}).get("actionDate"),
-        "origin_chamber": bill_data.get("originChamber"),
-        "policy_area": bill_data.get("policyArea", {}).get("name"),
-        "sponsor": bill_data.get("sponsors", [{}])[0].get("fullName"),
-        "sponsor_id": bill_data.get("sponsors", [{}])[0].get("bioguideId"),
-        "type": "bill"
-    }
+def is_valid_govinfo_url(url):
+    """Check if the URL is a valid Govinfo API URL for bills or laws."""
+    pattern = r"https?://api.govinfo.gov/packages/(BILLS|PLAW)-\S+/summary$"
+    return bool(re.match(pattern, url))
 
-    if "laws" in bill_data and bill_data["laws"]:
-        info["type"] = "law"
-        info["law_number"] = bill_data["laws"][0].get("number")
-        info["law_type"] = bill_data["laws"][0].get("type")
 
-    return info
-
-def get_bill_text_links(congress, bill_type, bill_number):
-    """Gets links to the HTML content of the bill text."""
-    text_url = f"https://api.congress.gov/v3/bill/{congress}/{bill_type}/{bill_number}/text"
-    params = get_api_params()
-    try:
-        response = session.get(text_url, params=params)
-        response.raise_for_status()
-        text_data = json.dumps(response.json())
-        return re.findall(r'https://www\.congress\.gov/\S+\.htm', text_data)
-    except requests.exceptions.RequestException as e:
-        print(f"Error getting bill text: {e}")
-        return []
-
-def summarize_bill_text(htm_links):
-    """Loads and summarizes the content of the bill text."""
-    combined_content = ""
-    for link in htm_links:
-        try:
-            response = session.get(link)
-            response.raise_for_status()
-            combined_content += response.text + "\n\n" 
-        except requests.exceptions.RequestException as e:
-            print(f"Error loading {link}: {e}")
-
-    if combined_content:
-        summary = model.generate_content(combined_content)
-        return summary.text if summary else "No summary generated."
+def get_bill_type_from_url(url):
+    """Determine if the URL refers to a bill or a law."""
+    if "BILLS" in url:
+        return "bill"
+    elif "PLAW" in url:
+        return "law"
     else:
-        return "No content available for summarization."
+        return None  # Or raise an error if needed
 
-def extract_bill_info_from_url(url):
-    """Extracts congress, bill type, and bill number from a congress.gov or api.congress.gov URL."""
-    pattern = r"https?://(?:www\.)?congress\.gov/bill/(\d+)(?:th|rd|nd|st)-congress/(senate|house)-bill/(\d+)"
-    match = re.search(pattern, url)
-
-    if match:
-        congress = match.group(1)
-        bill_type = "s" if match.group(2) == "senate" else "hr"
-        bill_number = match.group(3)
-        return congress, bill_type, bill_number
-    else:
-        raise ValueError("Invalid URL format. Must be a Congress.gov URL.")
 
 def generate_uid_from_url(url):
-    """Generates a unique ID (UID) from a URL using SHA-256 hashing."""
+    """Generate a unique ID (UID) from a URL using SHA-256 hashing."""
     return hashlib.sha256(url.encode('utf-8')).hexdigest()
 
+
 def store_bill_info_in_kv(bill_info, url):
-    """Stores bill information in Cloudflare Workers KV using the API."""
+    """Store bill information in Cloudflare Workers KV using the API."""
     uid = generate_uid_from_url(url)
-
-    conn = http.client.HTTPSConnection("api.cloudflare.com")
-
     payload = json.dumps(bill_info)
-
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f"Bearer {os.environ['CLOUDFLARE_API_TOKEN']}"
+        'Authorization': f"Bearer {CLOUDFLARE_API_TOKEN}"
     }
-
-    api_url = f"/client/v4/accounts/{os.environ['CLOUDFLARE_ACCOUNT_ID']}/storage/kv/namespaces/{os.environ['CLOUDFLARE_KV_NAMESPACE_ID']}/values/{uid}"
-
-    conn.request("PUT", api_url, payload, headers)
-
-    res = conn.getresponse()
-    data = res.read()
-
-    if res.status == 200:
-        print(f"Successfully stored bill info with UID: {uid}")
-    else:
-        print(f"Error storing bill info: {data.decode('utf-8')}")
-
-def get_bill_info_from_kv(url):
-    """Retrieves bill information from Cloudflare Workers KV if it exists."""
-    uid = generate_uid_from_url(url)
+    api_url = f"/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}/storage/kv/namespaces/{CLOUDFLARE_KV_NAMESPACE_ID}/values/{uid}"
 
     conn = http.client.HTTPSConnection("api.cloudflare.com")
+    conn.request("PUT", api_url, payload, headers)
+    res = conn.getresponse()
+    if res.status == 200:
+        logger.info(f"Successfully stored bill info with UID: {uid}")
+    else:
+        logger.error(f"Error storing bill info: {res.read().decode('utf-8')}")
 
+
+def get_bill_info_from_kv(uid):
+    """Retrieve bill information from Cloudflare Workers KV if it exists."""
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f"Bearer {os.environ['CLOUDFLARE_API_TOKEN']}"
+        'Authorization': f"Bearer {CLOUDFLARE_API_TOKEN}"
     }
+    api_url = f"/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}/storage/kv/namespaces/{CLOUDFLARE_KV_NAMESPACE_ID}/values/{uid}"
 
-    api_url = f"/client/v4/accounts/{os.environ['CLOUDFLARE_ACCOUNT_ID']}/storage/kv/namespaces/{os.environ['CLOUDFLARE_KV_NAMESPACE_ID']}/values/{uid}"
-
+    conn = http.client.HTTPSConnection("api.cloudflare.com")
     conn.request("GET", api_url, headers=headers)
-
     res = conn.getresponse()
-    data = res.read()
-
     if res.status == 200:
-        return json.loads(data.decode("utf-8"))
+        print("Loaded Info from KV")
+        return json.loads(res.read().decode("utf-8"))
     elif res.status == 404:
         return None
     else:
-        print(f"Error retrieving bill info from KV: {data.decode('utf-8')}")
+        logger.error(f"Error retrieving bill info from KV: {res.read().decode('utf-8')}")
         return None

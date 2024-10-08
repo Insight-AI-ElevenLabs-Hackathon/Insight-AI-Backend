@@ -4,26 +4,25 @@ import time
 import os
 from tqdm import tqdm
 from datetime import datetime, timedelta
-from requests.exceptions import RequestException, ConnectionError, HTTPError, Timeout
+from requests.exceptions import RequestException, ConnectionError, HTTPError
 import boto3
 from botocore.exceptions import BotoCoreError, NoCredentialsError
+import random
 
 # Cloudflare R2 (AWS S3 compatible) configuration
 R2_ACCESS_KEY = os.getenv("R2_ACCESS_KEY")
 R2_SECRET_KEY = os.getenv("R2_SECRET_KEY")
 R2_ENDPOINT = os.getenv("R2_ENDPOINT")
 R2_BUCKET = "elevenlabs-hackathon"
-R2_BILLS_FILE_KEY = "bills.json"
-R2_LAWS_FILE_KEY = "laws.json"
+R2_PACKAGES_FILE_KEY = "bills.json"
 
 # API endpoint and parameters
-base_url_bills = "https://api.congress.gov/v3/bill/118"
-base_url_laws = "https://api.congress.gov/v3/law/118"
+base_url = "https://api.govinfo.gov/collections/BILLS/2018-01-28T20%3A18%3A10Z"
 params = {
-    "format": "json",
-    "limit": 250,
-    "sort": "updateDate+desc",
-    "api_key": "TNMSLQibAQP7Lf0NFvypJn5dd8F8hZbwMdyo2Szz"
+    "pageSize": 1000,
+    "congress": 118,
+    "offsetMark": "*",
+    "api_key": "He7pQCphxtdIziKbNImyaDlelS2W5oXwgb8qKtg4"
 }
 
 # Initialize S3 client
@@ -34,13 +33,12 @@ s3 = boto3.client(
     endpoint_url=R2_ENDPOINT
 )
 
-
-def load_existing_data(file_key, item_type="bill"):
+def load_existing_data(file_key):
     """Load existing data from Cloudflare R2."""
     try:
         response = s3.get_object(Bucket=R2_BUCKET, Key=file_key)
         data = json.loads(response['Body'].read())
-        return data.get(item_type + "s", [])  # Access "bills" or "laws" key
+        return data.get("packages", [])
     except s3.exceptions.NoSuchKey:
         print(f"Data file {file_key} not found in R2. Starting fresh.")
         return []
@@ -48,23 +46,24 @@ def load_existing_data(file_key, item_type="bill"):
         print(f"Error loading existing data from {file_key}: {e}. Starting fresh.")
         return []
 
-
-def save_data(items, file_key, item_type="bill"):
+def save_data(items, file_key):
     """Save the updated and sorted data to Cloudflare R2."""
     try:
         s3.put_object(
             Bucket=R2_BUCKET,
             Key=file_key,
-            Body=json.dumps({item_type + "s": items}, indent=4)  # Save under "bills" or "laws"
+            Body=json.dumps({"packages": items}, indent=4)
         )
-        print(f"Data saved successfully to R2 ({file_key}). Total {item_type}s: {len(items)}")
+        print(f"Data saved successfully to R2 ({file_key}). Total packages: {len(items)}")
     except (BotoCoreError, NoCredentialsError) as e:
         print(f"Error saving data to R2 ({file_key}): {e}")
 
+def fetch_data_from_api(url, params, retries=3):
+    """Fetch data from the API and handle rate limiting with retries and exponential backoff."""
+    attempt = 0
+    backoff_time = 2  # Initial backoff time in seconds
 
-def fetch_data_from_api(url, params):
-    """Fetch data from the API and handle rate limiting."""
-    while True:
+    while attempt < retries:
         try:
             response = requests.get(url, params=params)
             response.raise_for_status()
@@ -76,30 +75,45 @@ def fetch_data_from_api(url, params):
                 continue
 
             return response.json()
-        except (HTTPError, Timeout) as e:
-            print(f"HTTP error or timeout: {e}. Retrying in 60 seconds...")
-            time.sleep(60)
+
+        except HTTPError as e:
+            if e.response.status_code == 500:
+                print(f"Server error (500) on attempt {attempt + 1}: {e}. Increasing backoff time...")
+                backoff_time *= 4  # More aggressive backoff for 500 errors
+            else:
+                print(f"HTTP error or timeout on attempt {attempt + 1}: {e}. Retrying in {backoff_time} seconds...")
+                backoff_time *= 2
+            time.sleep(backoff_time + random.uniform(0, 1))  # Jitter
+            attempt += 1
+
         except ConnectionError as e:
-            print(f"Connection error: {e}. Retrying in 30 seconds...")
-            time.sleep(30)
+            print(f"Connection error on attempt {attempt + 1}: {e}. Retrying in {backoff_time} seconds...")
+            time.sleep(backoff_time + random.uniform(0, 1))  # Jitter
+            backoff_time *= 2
+            attempt += 1
+
         except RequestException as e:
             print(f"Request failed: {e}")
             return None
 
+    print(f"Failed to fetch data after {retries} attempts.")
+    return None
 
-def update_items(existing_items, new_items, key_field="number"):
+def update_items(existing_items, new_items, key_field="packageId"):
     """Update the existing items with new data and stop if a match without updates is found."""
-    updated = False
+    updated = False  # Flag to indicate if any updates were made
+    stop_early = False  # Flag to indicate if a match with no updates was found
+
     for new_item in new_items:
         found_match = False
         for i, existing_item in enumerate(existing_items):
             if new_item[key_field] == existing_item[key_field]:
-                if new_item["updateDate"] > existing_item["updateDate"]:
+                if new_item["lastModified"] > existing_item["lastModified"]:
                     existing_items[i] = new_item  # Update existing item
                     print(f"Updated item: {new_item[key_field]}")
-                    updated = True
+                    updated = True 
                 found_match = True
-                break
+                break  # Exit inner loop if a match is found
         if not found_match:
             existing_items.insert(0, new_item)  # Add new item at the beginning
             updated = True
@@ -107,43 +121,43 @@ def update_items(existing_items, new_items, key_field="number"):
         elif found_match and not updated:
             # If a matching item is found and no updates were needed, stop further processing
             print("Match found with no updates needed. Stopping early to avoid unnecessary downloads.")
-            return updated, True
+            stop_early = True
+            break # Exit outer loop if no update needed
 
-    return updated, False
-
+    return updated, stop_early 
 
 def sort_items_by_date(items):
-    """Sort items by updateDateIncludingText in descending order."""
-    return sorted(items, key=lambda item: item['updateDateIncludingText'], reverse=True)
+    """Sort items by lastModified in descending order."""
+    return sorted(items, key=lambda item: item['lastModified'], reverse=True)
 
 
-def fetch_and_update_data(base_url, file_key, item_type="bill"):
+def fetch_and_update_data(base_url, file_key):
     """Fetches data from the API and updates the existing data in Cloudflare R2."""
 
     # Load existing data
-    all_items = load_existing_data(file_key, item_type)
+    all_items = load_existing_data(file_key)
 
-    # Get the last update date from the existing data (or a default date)
+    # Get the last modified date from the existing data (or a default date)
     if all_items:
-        last_update_date = datetime.fromisoformat(all_items[0]["updateDate"])
+        last_modified_date = datetime.fromisoformat(all_items[0]["lastModified"].replace("Z", "+00:00"))
     else:
-        last_update_date = datetime(2024, 4, 7)  # Default start date
+        last_modified_date = datetime(2018, 1, 28, 20, 18, 10)  # Default start date
 
-    # Set fromDateTime parameter based on the last update date
-    params["fromDateTime"] = (last_update_date + timedelta(seconds=1)).isoformat() + "Z"
+    # Set fromDateTime parameter based on the last modified date
+    params["fromDateTime"] = (last_modified_date + timedelta(seconds=1)).isoformat() + "Z"
 
     url = base_url
     updated = False
 
-    with tqdm(desc=f"Updating {item_type}s", unit=item_type) as pbar:
+    with tqdm(desc="Updating packages", unit="package") as pbar:
         while url:
             data = fetch_data_from_api(url, params)
             if data is None:
                 break  # Exit if the request failed
 
-            new_items = data.get("bills" if item_type == "bill" else "laws", [])  # Get bills or laws
+            new_items = data.get("packages", [])
             if not new_items:
-                print(f"No new {item_type}s found.")
+                print("No new packages found.")
                 break
 
             # Check for matching items and update/add as needed
@@ -157,27 +171,26 @@ def fetch_and_update_data(base_url, file_key, item_type="bill"):
             pbar.update(len(new_items))
 
             # Get the next page URL
-            pagination = data.get("pagination")
-            if pagination and pagination.get("next"):
-                url = pagination["next"]
-                url += f"&api_key={params['api_key']}"
-                time.sleep(1)
+            next_page_url = data.get("nextPage")
+            if next_page_url:
+                # Merge nextPage URL with api_key to avoid duplicates
+                url += f"&{params['api_key']}"
             else:
                 url = None
 
-    # Sort the items by updateDateIncludingText in descending order
+            time.sleep(1)
+
+    # Sort the items by lastModified in descending order
     all_items = sort_items_by_date(all_items)
 
     # Save the updated and sorted data
     if updated:
-        save_data(all_items, file_key, item_type)  # Pass item_type to save_data
+        save_data(all_items, file_key)
 
     if all_items:
-        print(f"Data updated successfully. Last updated {item_type}: {all_items[0]['updateDate']}")
+        print(f"Data updated successfully. Last updated package: {all_items[0]['lastModified']}")
     else:
-        print(f"No {item_type} data available.")
+        print("No package data available.")
 
-
-# Run the update function for bills and laws
-fetch_and_update_data(base_url_bills, R2_BILLS_FILE_KEY, "bill")
-fetch_and_update_data(base_url_laws, R2_LAWS_FILE_KEY, "law")
+# Run the update function for packages
+fetch_and_update_data(base_url, R2_PACKAGES_FILE_KEY)
