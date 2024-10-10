@@ -4,7 +4,7 @@ import time
 import os
 from tqdm import tqdm
 
-base_url = "https://api.govinfo.gov/collections/PLAW/2018-01-28T20%3A18%3A10Z"
+base_url = "https://api.govinfo.gov/collections/BILLS/2018-01-28T20%3A18%3A10Z"
 params = {
     "pageSize": 1000,
     "congress": 118,
@@ -40,9 +40,9 @@ else:
 
     if total_bills:
         pbar = tqdm(total=total_bills, desc="Downloading bills", unit="bill")
-        pbar.update(len(data.get("packages", []))) # Update progress for the first page
+        pbar.update(len(data.get("packages", [])))
     else:
-        pbar = tqdm(desc="Downloading bills", unit="bill")  # Indeterminate progress bar
+        pbar = tqdm(desc="Downloading bills", unit="bill")
 
 while url:
     try:
@@ -88,7 +88,7 @@ for chunk_file in os.listdir(data_dir):
             chunk_data = json.load(f)
             all_packages.extend(chunk_data.get("packages", []))
 
-with open("laws.json", "w") as f:
+with open("bills.json", "w") as f:
     json.dump({"packages": all_packages}, f, indent=4)
 
 print("All data successfully saved to laws.json")

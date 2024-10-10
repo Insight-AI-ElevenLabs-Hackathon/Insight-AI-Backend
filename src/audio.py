@@ -10,7 +10,6 @@ client = openai.OpenAI(
     api_key=os.environ.get("CEREBRAS_API_KEY")
 )
 
-# Configure R2 client
 s3 = boto3.client(
     's3',
     endpoint_url=os.getenv("R2_ENDPOINT"),
@@ -77,15 +76,13 @@ def generate_audio(text, uid):
         print("Warning: 'audio_base64' not found in the API response")
         return None, None
 
-    # Access audio_base64 directly from the response dictionary
     audio_bytes = base64.b64decode(response_dict["audio_base64"])
 
-    # Generate SRT subtitles using word-level timestamps with time-based segmentation
     srt_subtitles = ""
     subtitle_index = 1
     current_subtitle = ""
     start_time = None
-    last_end_time = 0  # Keep track of the end time of the previous subtitle
+    last_end_time = 0
 
     for i, (char, char_start_time, char_end_time) in enumerate(zip(
             response_dict['alignment']['characters'],
@@ -97,7 +94,6 @@ def generate_audio(text, uid):
     
         current_subtitle += char
 
-        # Check for word boundaries (space or punctuation) or end of text
         if i + 1 == len(response_dict['alignment']['characters']) or char.isspace() or char in ['.', ',', '!', '?']:
             end_time = char_end_time
 
@@ -113,13 +109,11 @@ def generate_audio(text, uid):
                 subtitle_index += 1
                 current_subtitle = ""
                 start_time = None
-                last_end_time = end_time  # Update the last end time
+                last_end_time = end_time
             else:
-                # Not enough time has passed, continue accumulating words
-                current_subtitle += " " # Add space for the next word
+                current_subtitle += " "
                 start_time = None
 
-    # Upload audio to R2
     audio_key = f"{uid}_en.mp3"
     try:
         s3.put_object(Bucket=os.environ.get("R2_BUCKET_NAME"),
@@ -128,7 +122,6 @@ def generate_audio(text, uid):
         print(f"Error uploading audio file: {str(e)}")
         return None, None
 
-    # Upload subtitles to R2
     srt_key = f"{uid}_en.srt"
     try:
         s3.put_object(Bucket=os.environ.get("R2_BUCKET_NAME"),
