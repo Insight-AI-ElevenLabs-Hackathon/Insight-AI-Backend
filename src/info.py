@@ -5,6 +5,7 @@ import logging
 import os
 import re
 from functools import lru_cache
+from src.audio import audio
 
 import google.generativeai as genai
 import requests
@@ -24,39 +25,54 @@ logger = logging.getLogger(__name__)
 # Configure session for API requests
 session = requests.Session()
 
-
 def process_bill_url(url):
-    """Process a bill URL and return a JSON object with bill info and summary."""
+    """Process a bill URL and return a JSON object with bill info, summary, and audio files."""
     try:
         if not is_valid_govinfo_url(url):
             raise ValueError("Invalid URL format. Must be a Govinfo API URL.")
 
         # Check KV for existing entry before doing anything else
         uid = generate_uid_from_url(url)
-        if get_bill_info_from_kv(uid):
-            return get_bill_info_from_kv(uid)
+        if existing_info := get_bill_info_from_kv(uid):
+            return existing_info
 
         bill_type = get_bill_type_from_url(url)  # Determine if it's a bill or law
 
         if bill_type == "bill":
-            bill_info, download_link = get_bill_info(url)
+            bill_info = get_bill_info(url)  # No need for download_links anymore
         elif bill_type == "law":
-            bill_info, download_link = get_law_info(url)
+            bill_info = get_law_info(url)  # No need for download_links anymore
         else:
             return {'error': 'Unsupported bill type'}
 
         if not bill_info:
             return {'error': 'Failed to retrieve bill information'}
 
-        if download_link:
-            htm_link = f"{download_link}?api_key={GOVINFO_API_KEY}"
-            summary, _ = summarize_bill_text(htm_link, url)  # UID already generated 
-            bill_info['summary'] = summary
+        # Construct htm and pdf links directly from the input URL
+        base_url = url.replace("/summary", "")
+        htm_link = f"{base_url}/htm?api_key={GOVINFO_API_KEY}"
+        pdf_link = f"{base_url}/pdf?api_key={GOVINFO_API_KEY}"
+
+        summary, _ = summarize_bill_text(htm_link, url)  # UID already generated
+        bill_info['summary'] = summary
+
+        # Add download links to bill_info
+        bill_info['htm_link'] = htm_link
+        bill_info['pdf_link'] = pdf_link
+
+        # Generate audio and subtitles
+        audio_path, srt_path = audio(summary, uid)
+        if audio_path and srt_path:
+            bill_info['audio_path'] = audio_path
+            bill_info['srt_path'] = srt_path
         else:
-            bill_info['summary'] = "No HTML link found for bill text."
+            bill_info['audio_path'] = None
+            bill_info['srt_path'] = None
+            logger.warning("Failed to generate audio and subtitles")
 
         # Add json_type to the final output
         bill_info['json_type'] = bill_type
+        bill_info['id'] = uid
 
         store_bill_info_in_kv(bill_info, url)
         return bill_info
@@ -77,11 +93,10 @@ def get_bill_info(url):
     try:
         response = session.get(f"{url}?api_key={GOVINFO_API_KEY}")
         response.raise_for_status()
-        bill_info, download_link = parse_bill_info(response.json())
-        return bill_info, download_link
+        return parse_bill_info(response.json())  # Return only bill_info
     except requests.exceptions.RequestException as e:
         logger.error(f"Error getting bill information: {e}")
-        return None, None
+        return None
 
 
 def parse_bill_info(bill_data):
@@ -103,11 +118,8 @@ def parse_bill_info(bill_data):
             "sponsor_party": sponsor.get("party"),
             "sponsor_id": sponsor.get("bioGuideId"),
         })
-    # Store the download link separately, not in the info dictionary
-    download_link = None
-    if download_links := bill_data.get("download"):
-        download_link = download_links.get('txtLink')
-    return info, download_link
+
+    return info  # Return only bill_info
 
 
 def get_law_info(url):
@@ -115,11 +127,10 @@ def get_law_info(url):
     try:
         response = session.get(f"{url}?api_key={GOVINFO_API_KEY}")
         response.raise_for_status()
-        law_info, download_link = parse_law_info(response.json())
-        return law_info, download_link
+        return parse_law_info(response.json())  # Return only law_info
     except requests.exceptions.RequestException as e:
         logger.error(f"Error getting law information: {e}")
-        return None, None
+        return None
 
 
 def parse_law_info(law_data):
@@ -130,11 +141,7 @@ def parse_law_info(law_data):
         "policy_area": law_data.get("branch")
     }
 
-    #  Handle download links for laws (if available)
-    download_link = None
-    if download_links := law_data.get("download"):
-        download_link = download_links.get('txtLink')
-    return info, download_link
+    return info  # Return only law_info
 
 
 def summarize_bill_text(htm_link, url):
@@ -178,10 +185,10 @@ def get_model():
         4. Avoid legislative jargon and focus on simplifying complex terms.
         5. Provide a summary in 5 to 7 bullet points, being concise and highlighting the key aspects.
 
-                Respond in markdown format. Do not add any pretext and greetings at the end or beginning of the summary.
-                Just return the points.
-                Do not include any backticks (```) for formatting.
-                """
+        Respond in markdown format. Do not add any pretext and greetings at the end or beginning of the summary.
+        Just return the points.
+        Do not include any backticks (```) for formatting.
+        """
     )
 
 
@@ -205,13 +212,12 @@ def get_bill_type_from_url(url):
     elif "PLAW" in url:
         return "law"
     else:
-        return None  # Or raise an error if needed
+        return None
 
 
 def generate_uid_from_url(url):
     """Generate a unique ID (UID) from a URL using SHA-256 hashing."""
     return hashlib.sha256(url.encode('utf-8')).hexdigest()
-
 
 def store_bill_info_in_kv(bill_info, url):
     """Store bill information in Cloudflare Workers KV using the API."""
