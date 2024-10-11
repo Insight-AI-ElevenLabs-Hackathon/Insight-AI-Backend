@@ -1,9 +1,12 @@
 import requests
 import json
 import os
+from dotenv import load_dotenv
 import base64
 import openai
 import boto3
+
+load_dotenv()
 
 api_key = os.getenv("CEREBRAS_API_KEY")
 
