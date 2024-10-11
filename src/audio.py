@@ -5,9 +5,11 @@ import base64
 import openai
 import boto3
 
+api_key = os.getenv("CEREBRAS_API_KEY")
+
 client = openai.OpenAI(
     base_url="https://api.sambanova.ai/v1",
-    api_key=os.getenv("CEREBRAS_API_KEY")
+    api_key=api_key
 )
 
 s3 = boto3.client(
