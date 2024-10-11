@@ -7,7 +7,7 @@ import boto3
 
 client = openai.OpenAI(
     base_url="https://api.sambanova.ai/v1",
-    api_key=os.environ.get("CEREBRAS_API_KEY")
+    api_key=os.getenv("CEREBRAS_API_KEY")
 )
 
 s3 = boto3.client(

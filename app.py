@@ -2,9 +2,7 @@ from flask import Flask, jsonify, request
 from src.info import process_bill_url
 from src.dub import dub
 from urllib.parse import unquote
-from dotenv import load_dotenv
-
-load_dotenv()
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
